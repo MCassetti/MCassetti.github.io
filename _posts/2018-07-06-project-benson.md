@@ -24,13 +24,18 @@ Three sources were leveraged to do this analysis were as follows
 3. NY Crime Statistics 
 
 ### Tools
-1) Python's pickle module
-2) Pandas
-3) Yelp Api
-4) NYC Open Data 
-5) GeoPandas
+1. Pickle
+2. Pandas
+3. Yelp Api
+5. GeoPandas
 
-### Data Model
+### Deliverable
+Top 10 Stations with highest number of candidate donors 
+
+### Approach
+The goal is to form a reasonable estimate of the number of canidate donors. We can inference this by working backwards from the number of people that are likely to be in a NY Michelin restaraunt on a busy night. In order for a restaraunt to stay open and profitable, it is reasonable to say ~250 people will be at eachrestaraunt on a Friday night. Of those 250 people, on the conservative end, half will have commuted from a subway nearby.
+Therefore, if we known the denisty of these high price restaraunts in proximity to the nearest train station, which can be done via querying the Yelp Api for $$$$ restaraunts, guess to the demographics of subway goers in that area. 
+Given the engagement for sales rate is very low, we can give a smaller guess to a lower bound as being ~2%engagement, we can find the number of people at that time that way engage. Since we know the approximate demographic in that region, we can infer that a certain number of those people are going to a $$$$ restaraunt. From there we can make a reasonable first guess to the number of donations after engagement. For this study we chose 20% of engagements from target demographic as being our candidate donors.
 
 
 ### Data Processing
@@ -42,33 +47,41 @@ of some code that can be used to filter out these data points
 ```python
 
 ```
+Once this data was packaged the highest stations can be evaluated. This can further be broken down by time of day and ay of week. 
+A time series shows that Friday night around 8pm has largest density of foot traffic compared to other days. 
 
-
-### Analysis
+Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of enteries recievedis greater or 
+**Insert figure here**
+![alt_text](http://zwmiller.com/projects/images/monte_carlo/part5/business_impact.png)
 
 ### Results
-Using the data model to select for 
+The following is a table shows the top 10 stations on Friday night between 6-10pm
 
-Subway Station	Foot Traffic (people)	Number of High Priced Restaurants	Sales Reps Required	Donors
-3rd Avenue - 149 St	6436	37	3	19
-Brighton Beachn	5762	38	2	19
-167 St	7851	36	3	18
-161 St/Yankee Stadium	7522	36	3	18
-149 St/Grand Conc	4911	37	2	18
-Flushing-Main	29208	34	12	17
-Kings Highway	10528	33	4	17
-5th Avenue	9099	34	4	17
-103 St - Corona	8268	35	3	17
-Fordham Rd	7623	34	3	17
+
+
+  Subway Station       	Foot Traffic (people)	Number of High Priced Restaurants	Sales Reps Required	Donors
+  3rd Avenue - 149 St  	6436                 	37                               	3                  	19    
+  Brighton Beachn      	5762                 	38                               	2                  	19    
+  167 St               	7851                 	36                               	3                  	18    
+  161 St/Yankee Stadium	7522                 	36                               	3                  	18    
+  149 St/Grand Conc    	4911                 	37                               	2                  	18    
+  Flushing-Main        	29208                	34                               	12                 	17    
+  Kings Highway        	10528                	33                               	4                  	17    
+  5th Avenue           	9099                 	34                               	4                  	17    
+  103 St - Corona      	8268                 	35                               	3                  	17    
+  Fordham Rd           	7623                 	34                               	3                  	17    
+
+ 
+
+
+Here is a picture with the subway stations overlayed with Robberies in that NY metropolotian area at that time. This plot was generating using the GeoPandas module
+
+
 ### Conclusion
-![alt_text](http://zwmiller.com/projects/images/monte_carlo/part5/business_impact.png)
-Go to Union station. Or Penn. Seriously, the are the busiest.
-(For entries)
+We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data. 
 
-Don't expose yourself
+![alt_text](http://zwmiller.com/projects/images/monte_carlo/part5/business_impact.png)
 
 ### Recommendaiton
-
-Give me **all** the money. We will work for you :thumbsup:
-
+The model can be updated to include other demographics more specific to the company (women in tech) or by creating an optimal customer profile such people that attend museums or ballets, or those that have a history of donation. =
 
