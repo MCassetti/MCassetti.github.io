@@ -52,7 +52,7 @@ turnstiles_df['totals'] = turnstiles_df['totals'].interpolate(method="linear")
 Once this data was packaged the highest stations can be evaluated. This can further be broken down by time of day and ay of week. 
 A time series shows that Friday night around 8pm has largest density of foot traffic compared to other days. 
 
-![alt_text](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/timeseries_data.png)
+[[https://github.com/MCassetti/MCassetti.github.io/tree/master/public/timeseries_data.png|alt=time series data NYC]]
 
 Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of entries received is under the limit before attempt more queries. Each api key has a certain number of queries (10,000 as of the time of this writing, with a query limit of 50), therefore this is the only feasible work around.
 ```python
@@ -99,12 +99,11 @@ The following is a table shows the top 10 stations on Friday night between 6-10p
 
 Here is a picture with the subway stations overlayed with Robberies in that NY metropolotian area at that time. This plot was generating using the GeoPandas module
 
-
-![alt_text](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/pandas_plot.png)
+[[https://github.com/MCassetti/MCassetti.github.io/tree/master/public/pandas_plot.png|alt=recommendations overlayed]]
 
 ### Conclusion
 We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data and very few underlying assumptions.
 
 ### Recommendaiton
-The model can be updated to include other demographics more specific to the company (women in tech) or by creating an optimal customer profile such people that attend museums or ballets, or those that have a history of donation.
-Additionally, this strategy should be tested and the probability of engagement and donation updated in themodel for future studies. 
+The model can be updated to include other demographics more specific to the company (women in tech) or by creating an optimal customer profile such people that attend museums, or those that have a history of donation.
+Additionally, this strategy should be tested and the probability of engagement and donation updated in the model for future studies. 
