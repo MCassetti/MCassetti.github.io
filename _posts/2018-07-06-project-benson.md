@@ -53,7 +53,7 @@ turnstiles_df['totals'] = turnstiles_df['totals'].interpolate(method="linear")
 Once this data was packaged the most populated stations can be evaluated. This can further be broken down by time of day and ay of week. 
 A time series shows that Friday night around 8pm has largest density of foot traffic compared to other days. 
 
-![](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/timeseries_data.png)
+![](https://github.com/MCassetti/MCassetti.github.io/blob/master/public/timeseries_data.png)
 
 Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of entries received is under the limit before attempt more queries. Each api key has a certain number of queries (10,000 as of the time of this writing, with a query limit of 50), therefore this is the only feasible work around.
 ```python
@@ -96,7 +96,9 @@ The following is a table shows the top 10 stations on Friday night between 6-10p
 The other columns that were added include the sales reps required, which was added as a recommendation based on number of people likely to be engaged (2%) and the average time to talk to someone and persuade them to sign up (5 minutes). Given they will be deployed from 6pm-10pm time frame. This is just an estimate and recommedation, however it should probably be used if there is a shot at capturing maximum candidate donors
 
 Here is a picture with the subway stations overlayed with Robberies in that NY metropolotian area at that time. This plot was generating using the GeoPandas module
-![](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/pandas_plot.png)
+
+![](https://github.com/MCassetti/MCassetti.github.io/blob/master/public/pandas_plot.png)
+
 ### Conclusion
 We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data and very few underlying assumptions.
 
