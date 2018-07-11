@@ -24,13 +24,14 @@ Three sources were leveraged to do this analysis were as follows
 3. NY Crime Statistics 
 
 ### Tools
+Four major tools were useful for this analysis
 1. Pickle
 2. Pandas
 3. Yelp Api
 5. GeoPandas
 
 ### Deliverable
-Top 10 Stations with highest number of candidate donors 
+Top 10 station recommendations and recommendated day time of day  
 
 ### Approach
 The goal is to form a reasonable estimate of the number of canidate donors. We can inference this by working backwards from the number of people that are likely to be in a NY Michelin restaraunt on a busy night. In order for a restaraunt to stay open and profitable, it is reasonable to say ~250 people will be at eachrestaraunt on a Friday night. Of those 250 people, on the conservative end, half will have commuted from a subway nearby.
@@ -52,14 +53,12 @@ turnstiles_df['totals'] = turnstiles_df['totals'].interpolate(method="linear")
 Once this data was packaged the highest stations can be evaluated. This can further be broken down by time of day and ay of week. 
 A time series shows that Friday night around 8pm has largest density of foot traffic compared to other days. 
 
-[[https://github.com/MCassetti/MCassetti.github.io/tree/master/public/timeseries_data.png|alt=time series data NYC]]
+![](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/timeseries_data.png?raw=true)
 
 Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of entries received is under the limit before attempt more queries. Each api key has a certain number of queries (10,000 as of the time of this writing, with a query limit of 50), therefore this is the only feasible work around.
 ```python
 def iter_search(offset,limit,loc):
-    # make this more flexible in the future
-    # take in json file and allow user to set new
-    # parameters on the fly
+    # Example of yelp query 
     args = {
     'location': loc,
     'limit': limit,
@@ -94,13 +93,10 @@ The following is a table shows the top 10 stations on Friday night between 6-10p
 | Fordham Rd            | 7623                  | 34                                | 3                   | 17     |
 
  
- 
-
+The other columns that were added include the sales reps required, which was added as a recommendation based on number of people likely to be engaged (2%) and the average time to talk to someone and persuade them to sign up (5 minutes). Given they will be deployed from 6pm-10pm time frame. This is just an estimate and recommedation, however it should probably be used if there is a shot at capturing maximum candidate donors
 
 Here is a picture with the subway stations overlayed with Robberies in that NY metropolotian area at that time. This plot was generating using the GeoPandas module
-
-[[https://github.com/MCassetti/MCassetti.github.io/tree/master/public/pandas_plot.png|alt=recommendations overlayed]]
-
+![](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/pandas_plot.png?raw=true)
 ### Conclusion
 We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data and very few underlying assumptions.
 
