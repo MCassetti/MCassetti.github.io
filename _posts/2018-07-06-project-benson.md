@@ -45,43 +45,66 @@ data. Pandas is a power python tool for packacking and analzying data sets. GeoP
 The Turnstile data is riddled with erroenous entries including negative values. Here is an example
 of some code that can be used to filter out these data points
 ```python
-
+turnstiles_df.loc[(turnstiles_df['totals'] < 0) | (
+                  turnstiles_df['totals'] > 100000), 'totals'] = np.nan
+turnstiles_df['totals'] = turnstiles_df['totals'].interpolate(method="linear")
 ```
 Once this data was packaged the highest stations can be evaluated. This can further be broken down by time of day and ay of week. 
 A time series shows that Friday night around 8pm has largest density of foot traffic compared to other days. 
 
-Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of enteries recievedis greater or 
-**Insert figure here**
-![alt_text](http://zwmiller.com/projects/images/monte_carlo/part5/business_impact.png)
+![alt_text](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/timeseries_data.png)
+
+Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of entries received is under the limit before attempt more queries. Each api key has a certain number of queries (10,000 as of the time of this writing, with a query limit of 50), therefore this is the only feasible work around.
+```python
+def iter_search(offset,limit,loc):
+    # make this more flexible in the future
+    # take in json file and allow user to set new
+    # parameters on the fly
+    args = {
+    'location': loc,
+    'limit': limit,
+    'offset': offset,
+    'categories': 'coffee,restaurants',
+    'open_at': 1530878400,  
+    'radius_filter': '241.40160000000003',
+    'price': '4'
+    }
+    search_results = yelp_api.search_query(**args)
+    return search_results
+```
+Call this function in a loop and query with offsets that are multiples of the limit to save time.
+
+The crime data is from NYC Open data set, which allows for downloading of csv files. The crimes are bin by type and locations (latitiude and longitude). We include this for completeness to show our results overlayed on the crime map of NYC. We chose one type of crime (robberies) for this analysis.
 
 ### Results
 The following is a table shows the top 10 stations on Friday night between 6-10pm
 
 
+| Subway Station        | Foot Traffic (people) | Number of High Priced Restaurants | Sales Reps Required | Donors |
+| --------------------- | --------------------- | --------------------------------- | ------------------- | ------ |
+| 3rd Avenue - 149 St   | 6436                  | 37                                | 3                   | 19     |
+| Brighton Beachn       | 5762                  | 38                                | 2                   | 19     |
+| 167 St                | 7851                  | 36                                | 3                   | 18     |
+| 161 St/Yankee Stadium | 7522                  | 36                                | 3                   | 18     |
+| 149 St/Grand Conc     | 4911                  | 37                                | 2                   | 18     |
+| Flushing-Main         | 29208                 | 34                                | 12                  | 17     |
+| Kings Highway         | 10528                 | 33                                | 4                   | 17     |
+| 5th Avenue            | 9099                  | 34                                | 4                   | 17     |
+| 103 St - Corona       | 8268                  | 35                                | 3                   | 17     |
+| Fordham Rd            | 7623                  | 34                                | 3                   | 17     |
 
-  Subway Station       	Foot Traffic (people)	Number of High Priced Restaurants	Sales Reps Required	Donors
-  3rd Avenue - 149 St  	6436                 	37                               	3                  	19    
-  Brighton Beachn      	5762                 	38                               	2                  	19    
-  167 St               	7851                 	36                               	3                  	18    
-  161 St/Yankee Stadium	7522                 	36                               	3                  	18    
-  149 St/Grand Conc    	4911                 	37                               	2                  	18    
-  Flushing-Main        	29208                	34                               	12                 	17    
-  Kings Highway        	10528                	33                               	4                  	17    
-  5th Avenue           	9099                 	34                               	4                  	17    
-  103 St - Corona      	8268                 	35                               	3                  	17    
-  Fordham Rd           	7623                 	34                               	3                  	17    
-
+ 
  
 
 
 Here is a picture with the subway stations overlayed with Robberies in that NY metropolotian area at that time. This plot was generating using the GeoPandas module
 
 
-### Conclusion
-We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data. 
+![alt_text](https://github.com/MCassetti/MCassetti.github.io/tree/master/public/pandas_plot.png)
 
-![alt_text](http://zwmiller.com/projects/images/monte_carlo/part5/business_impact.png)
+### Conclusion
+We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data and very few underlying assumptions.
 
 ### Recommendaiton
-The model can be updated to include other demographics more specific to the company (women in tech) or by creating an optimal customer profile such people that attend museums or ballets, or those that have a history of donation. =
-
+The model can be updated to include other demographics more specific to the company (women in tech) or by creating an optimal customer profile such people that attend museums or ballets, or those that have a history of donation.
+Additionally, this strategy should be tested and the probability of engagement and donation updated in themodel for future studies. 
