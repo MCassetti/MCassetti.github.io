@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Targetting Demographics with Open Source Data
+title: Targetting Demographics with NYC Open Source Data
 ---
 ### Introduction
 In this exploratory data analysis, a company called Women Tech Women Yes is looking to distribute 
@@ -31,10 +31,12 @@ Four major tools were useful for this analysis
 5. GeoPandas
 
 ### Deliverable
-Top 10 station recommendations and recommendated day time of day  
+1. Top 10 station recommendations
+2. Recommended Time of Day
 
 ### Approach
-The goal is to form a reasonable estimate of the number of canidate donors. We can infer this by working backwards from the number of people that are likely to be in a NYC Michelin restaraunt on a busy night. In order for a restaraunt to stay open and profitable, it is reasonable to say ~250 people will be at each restaraunt on a Friday night. Of those 250 people, on the conservative end, half will have commuted from a subway nearby.
+The goal is to form a reasonable estimate of the number of canidate donors. 
+We can infer this by working backwards from the number of people that are likely to be in a NYC Michelin restaraunt on a busy night. In order for a restaraunt to stay open and profitable, it is reasonable to say ~250 people will be at each restaraunt on a Friday night. Of those 250 people, on the conservative end, half will have commuted from a subway nearby.
 Therefore, if we know the denisty of these high price restaraunts in proximity to the nearest train station, which can be done via querying the Yelp Api for $$$$ restaraunts, guess to the demographics of subway goers in that area. 
 Given the engagement for sales rate is very low, we can give a smaller guess to a lower bound as being ~2% engagement, we can find the number of people at that time that way engage. Since we know the approximate demographic in that region, we can infer that a certain number of those people are going to a $$$$ restaraunt. From there we can make a reasonable first guess to the number of donations after engagement. For this study we chose 20% of engagements from target demographic as being our candidate donors.
 
@@ -55,7 +57,7 @@ A time series analysis showed that Friday night around 8pm has largest density o
 
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/timeseries_data.png)
 
-Query the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of entries received is under the limit before attempt more queries. Each api key has a certain number of queries (10,000 as of the time of this writing, with a query limit of 50), therefore this is the only feasible work around.
+Queries to the Yelp API was done in the standard method. However it is rate limited. To get arround it, we propose query with an offset of multiples of the rate limit and determining if the number of entries received is under the limit before attempt more queries. Each api key has a certain number of queries (10,000 as of the time of this writing, with a query limit of 50), therefore this is the only feasible work around.
 ```python
 def iter_search(offset,limit,loc):
     # Example of yelp query 
