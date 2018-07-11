@@ -4,7 +4,7 @@ title: Targetting Demographics with Open Source Data
 ---
 ### Introduction
 In this exploratory data analysis, a company called Women Tech Women Yes is looking to distribute 
-leafleters in order to boost attendance and donations at their 2018 Gala. For the exploration, 
+leafleters in NYC Subway stations in order to boost attendance and donations at their 2018 Gala. For the exploration, 
 our team proposes optimal locations by using target demographic and open source data.
 
 The target demographic in this example, can range from specific to broad. 
@@ -74,9 +74,6 @@ def iter_search(offset,limit,loc):
 Call this function in a loop and query with offsets that are multiples of the limit to save time.
 
 The crime data is from NYC Open data set, which allows for downloading of csv files. The crimes are bin by type and locations (latitiude and longitude). We include this for completeness to show our results overlayed on the crime map of NYC. We chose one type of crime (robberies) for this analysis.
-
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
-
 ### Results
 The following is a table shows the top 10 stations on Friday night between 6-10pm
 
@@ -99,7 +96,7 @@ The other columns that were added include the sales reps required, which was add
 
 Here is a picture with the subway stations overlayed with Robberies in that NY metropolotian area at that time. This plot was generating using the GeoPandas module
 
-
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
 
 ### Conclusion
 We can formulate a reasonable number of candiate donors from using restaraunt pricing to find subway locations to target our demographics. The data analysis can be done with open source data and very few underlying assumptions.
