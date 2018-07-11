@@ -7,8 +7,8 @@ In this exploratory data analysis, a company called Women Tech Women Yes is look
 leafleters in order to boost attendance and donations at their 2018 Gala. For the exploration, 
 our team proposes optimal locations by using target demographic and open source data.
 
-The target demographic in this example, can range from spefic to broad. 
-For the scope of exploration project, we chose to remaing broad, focusing instead on the following
+The target demographic in this example, can range from specific to broad. 
+For the scope of exploration project, we chose to remain broad, focusing instead on the following
 
 1. Time of day with highest foot traffic
 2. Subway locations with high density of upscale restaraunts
@@ -34,9 +34,9 @@ Four major tools were useful for this analysis
 Top 10 station recommendations and recommendated day time of day  
 
 ### Approach
-The goal is to form a reasonable estimate of the number of canidate donors. We can inference this by working backwards from the number of people that are likely to be in a NY Michelin restaraunt on a busy night. In order for a restaraunt to stay open and profitable, it is reasonable to say ~250 people will be at eachrestaraunt on a Friday night. Of those 250 people, on the conservative end, half will have commuted from a subway nearby.
-Therefore, if we known the denisty of these high price restaraunts in proximity to the nearest train station, which can be done via querying the Yelp Api for $$$$ restaraunts, guess to the demographics of subway goers in that area. 
-Given the engagement for sales rate is very low, we can give a smaller guess to a lower bound as being ~2%engagement, we can find the number of people at that time that way engage. Since we know the approximate demographic in that region, we can infer that a certain number of those people are going to a $$$$ restaraunt. From there we can make a reasonable first guess to the number of donations after engagement. For this study we chose 20% of engagements from target demographic as being our candidate donors.
+The goal is to form a reasonable estimate of the number of canidate donors. We can infer this by working backwards from the number of people that are likely to be in a NYC Michelin restaraunt on a busy night. In order for a restaraunt to stay open and profitable, it is reasonable to say ~250 people will be at each restaraunt on a Friday night. Of those 250 people, on the conservative end, half will have commuted from a subway nearby.
+Therefore, if we know the denisty of these high price restaraunts in proximity to the nearest train station, which can be done via querying the Yelp Api for $$$$ restaraunts, guess to the demographics of subway goers in that area. 
+Given the engagement for sales rate is very low, we can give a smaller guess to a lower bound as being ~2% engagement, we can find the number of people at that time that way engage. Since we know the approximate demographic in that region, we can infer that a certain number of those people are going to a $$$$ restaraunt. From there we can make a reasonable first guess to the number of donations after engagement. For this study we chose 20% of engagements from target demographic as being our candidate donors.
 
 
 ### Data Processing
@@ -51,7 +51,7 @@ turnstiles_df.loc[(turnstiles_df['totals'] < 0) | (
 turnstiles_df['totals'] = turnstiles_df['totals'].interpolate(method="linear")
 ```
 Once this data was packaged the most populated stations can be evaluated. This can further be broken down by time of day and ay of week. 
-A time series shows that Friday night around 8pm has largest density of foot traffic compared to other days. 
+A time series analysis showed that Friday night around 8pm has largest density of foot traffic compared to other days. 
 
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/timeseries_data.png)
 
@@ -74,7 +74,6 @@ def iter_search(offset,limit,loc):
 Call this function in a loop and query with offsets that are multiples of the limit to save time.
 
 The crime data is from NYC Open data set, which allows for downloading of csv files. The crimes are bin by type and locations (latitiude and longitude). We include this for completeness to show our results overlayed on the crime map of NYC. We chose one type of crime (robberies) for this analysis.
-
 
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
 
