@@ -76,7 +76,7 @@ Additionally two non-linear regressors were explored
 Ultimately, the reguralization did little to boost the performance of this model, indicating the surviving features were all significant.
 Additionally, the polynominal models performed the best, indicating non-linearity after transformation had been applied. 
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/polynominal.png)
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/polynomial.png)
 
 
 Taking a closer look at the non-linear regressors, we get even better validation and test scores, in some cases close to .95 r_squared value. This is incredible, but
