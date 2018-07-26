@@ -12,6 +12,9 @@ as number of tweets and google's interest metrics.
 
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/Price_bubble.png)
 
+
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/price_correlations.png)
+
 ### Deliverable
 1. Linear Regression model which predicts the price of bitcoin 
 
@@ -73,19 +76,19 @@ Additionally two non-linear regressors were explored
 Ultimately, the reguralization did little to boost the performance of this model, indicating the surviving features were all significant.
 Additionally, the polynominal models performed the best, indicating non-linearity after transformation had been applied. 
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/polynominsl.svg)
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/polynominal.png)
 
 
 Taking a closer look at the non-linear regressors, we get even better validation and test scores, in some cases close to .95 r^2 value. This is incredible, but
 the real question comes down to price prediction, which our model would indicate we have found a btc price crystal ball.
 Unfortunately after trying to predict the daily price of btc, given known feature values, the predictions did not seem to go as planned.
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/random_forest.svg)
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/random_forest.png)
 
 ### Conclusion
 Ultimately, there are several major issues with this linear regression model. Namely, doing linear regression on a time series. In particular, time series data exhibits autocorrelation, which means the residuals versus your fitted data shows a clear pattern with respect to the independent variables, i.e. heteroskedastic. 
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/residuals.png)
 
 Additionally, the reason the estimate was so off has to do with the overall price volitility of bitcoin, especially over the last year. Since the variance is close to XXXX over the course of a year then even with r^2 accounting for 95% of the variation, it is reasonable to get estimates off from the actual price on the magnitutde as seen from our predictor. 
 
