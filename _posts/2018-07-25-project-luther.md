@@ -16,7 +16,7 @@ as number of tweets and google's interest metrics.
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/price_correlations.png)
 
 ### Deliverable
-1. Linear Regression model which predicts the price of bitcoin 
+1. Linear regression model which predicts the price of bitcoin 
 
 ### Data Sources
 Data was scrapped off the internet using a combination of Selenium and BeautifulSoup.
