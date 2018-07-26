@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Road to Riches: Predicting the Price of Bitcoin Using Linear Regression 
+title: Predicting the Price of Bitcoin Using Linear Regression 
 ---
 ### Introduction
 The goal is to predict the price of bitcoin by chosing features that are not directly
