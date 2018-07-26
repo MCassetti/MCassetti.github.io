@@ -10,7 +10,7 @@ adoptability and tries to predict the price of bitcoin. This was primarly done a
 BTC price bubble from 2017 highly correlates with the behavior of other features such
 as number of tweets and google's interest metrics.
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/Price_bubble.png)
 
 ### Deliverable
 1. Linear Regression model which predicts the price of bitcoin 
@@ -73,14 +73,14 @@ Additionally two non-linear regressors were explored
 Ultimately, the reguralization did little to boost the performance of this model, indicating the surviving features were all significant.
 Additionally, the polynominal models performed the best, indicating non-linearity after transformation had been applied. 
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/polynominsl.svg)
 
-![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/pandas_plot.png)
 
 Taking a closer look at the non-linear regressors, we get even better validation and test scores, in some cases close to .95 r^2 value. This is incredible, but
 the real question comes down to price prediction, which our model would indicate we have found a btc price crystal ball.
 Unfortunately after trying to predict the daily price of btc, given known feature values, the predictions did not seem to go as planned.
 
+![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/random_forest.svg)
 
 ### Conclusion
 Ultimately, there are several major issues with this linear regression model. Namely, doing linear regression on a time series. In particular, time series data exhibits autocorrelation, which means the residuals versus your fitted data shows a clear pattern with respect to the independent variables, i.e. heteroskedastic. 
