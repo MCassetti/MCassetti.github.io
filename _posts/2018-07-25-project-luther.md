@@ -41,9 +41,7 @@ following features were chosen
 ### Exploratory Data Analysis
 The first step was to run OLS and classify how well the model does in the absence 
 of transformation or regularization.
-Upon first glance, the model produced a fairly good r_squared, however it is clear that the features are highly non-linear
-relationship to the price. Additionally, at this stage, despite the r_squared, the model is not given prediction in a reasonable
-price range. 
+Upon first glance, the model produced a fairly good r_squared value around 0.88, however it was clear that the features form a highly non-linear relationsip to the price. 
 
 Regularization was done to determine which, if any of the features could be excluded. Using L1 and L2 regularization, it was shown that the number of commits to the btc github repo did not correlate with price. This seems to indicate the interest to maintaining the bitcoin code base is not financially motivated!
 
