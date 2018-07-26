@@ -41,8 +41,8 @@ following features were chosen
 ### Exploratory Data Analysis
 The first step was to run OLS and classify how well the model does in the absence 
 of transformation or regularization.
-Upon first glance, the model produced a fairly good r^2, however it is clear that the features are highly non-linear
-relationship to the price. Additionally, at this stage, despite the r^2, the model is not given prediction in a reasonable
+Upon first glance, the model produced a fairly good r_squared, however it is clear that the features are highly non-linear
+relationship to the price. Additionally, at this stage, despite the r_squared, the model is not given prediction in a reasonable
 price range. 
 
 Regularization was done to determine which, if any of the features could be excluded. Using L1 and L2 regularization, it was shown that the number of commits to the btc github repo did not correlate with price. This seems to indicate the interest to maintaining the bitcoin code base is not financially motivated!
@@ -79,7 +79,7 @@ Additionally, the polynominal models performed the best, indicating non-linearit
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/polynominal.png)
 
 
-Taking a closer look at the non-linear regressors, we get even better validation and test scores, in some cases close to .95 r^2 value. This is incredible, but
+Taking a closer look at the non-linear regressors, we get even better validation and test scores, in some cases close to .95 r_squared value. This is incredible, but
 the real question comes down to price prediction, which our model would indicate we have found a btc price crystal ball.
 Unfortunately after trying to predict the daily price of btc, given known feature values, the predictions did not seem to go as planned.
 
@@ -90,7 +90,7 @@ Ultimately, there are several major issues with this linear regression model. Na
 
 ![alt_text](https://raw.githubusercontent.com/MCassetti/MCassetti.github.io/master/public/residuals.png)
 
-Additionally, the reason the estimate was so off has to do with the overall price volitility of bitcoin, especially over the last year. Since the variance is close to XXXX over the course of a year then even with r^2 accounting for 95% of the variation, it is reasonable to get estimates off from the actual price on the magnitutde as seen from our predictor. 
+Additionally, the reason the estimate was so off has to do with the overall price volitility of bitcoin, especially over the last year. Since the variance is close to 3700USD over the course of a year then even with r_squared accounting for 95% of the variation, it is reasonable to get estimates off from the actual price on the magnitutde as seen from our predictor. 
 
 The other major issue with this model is that it has a casuality issue. Once the the features are known (number of tweets, transactions, etc), then so too is the price. This means in order to actually use this model in a trading stradegy, it would have to predict the future price.  
 
